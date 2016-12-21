@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TASKTIv2.Models.DataGuest>
+@using Microsoft.AspNet.Identity
+
+@Html.AntiForgeryToken()
+
+@{
+    ViewBag.Title = "Daftar Tamu";
+}
+
+<h2>Daftar Tamu</h2>
+<p>
+    @Html.Raw(ViewBag.Pesan)
+</p>
+
+<p><a href="/Guest/Create" class="btn btn-primary btn-lg">Tambah Tamu</a></p>
+
+<table style="position:relative;left:80px;top:5px">
+    <tr>
+        <td> <p> @Html.ActionLink("Tambah Tamu", "Create")</p></td>
+        
+        <td></td>
+        
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NamaGuest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alamat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ucapan)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamaGuest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alamat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ucapan)
+            </td>
+            @if (item.NamaGuest == User.Identity.GetUserName())
+            {
+                <td>                    
+                    <input type="button" value="Edit" onclick="location.href='@Url.Action("Edit","DataGuest")?IdGuest=' + @item.IdGuest" class="btn"btn-warning" />
+                    <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete","DataGuest")?IdGuest=' + @item.IdGuest" class="btn" btn-danger" />
+                    @Html.ActionLink("delete", "Delete", new { id = item.IdGuest },
+               htmlAttributes: new { onclick = "return confirm('Apakah anda yakin akan menhapus data ini?');" })                
+                </td>
+            }
+           
+        </tr>
+    }
+</table>

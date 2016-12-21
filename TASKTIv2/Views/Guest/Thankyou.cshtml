@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Thankyou";
+}
+
+<h2>TERIMAKASIH</h2>
+
+<h2 style="text-align:center;padding-top:20px">
+    Terimakasih telah datang
+</h2>
+
+<script type="text/javascript">
+    var timer = 3;//seconds
+    website = "http://localhost:61156/Tamus/Create"
+    function delayer() {
+        window.location = website
+    }
+
+    setTimeout('delayer()', 1000 * timer);
+</script>
